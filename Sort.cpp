@@ -1,6 +1,6 @@
 
 /***********************Comparison Sorting****************************/
-	
+
 	/***************************Bubble Sort***************************/
 
 	void BubbleSort(int *arr, int n)
@@ -16,7 +16,7 @@
 	}
 
 
-	/**************************Selection Sort**************************/	
+	/**************************Selection Sort**************************/
 	void SelectionSort(int *arr, int n)
 	{
 		for(int i = 0; i < n; i ++)
@@ -26,7 +26,7 @@
 			{
 				if(arr[j] < arr[k]) k = j;
 			}
-			if( k != i ) 
+			if( k != i )
 				Swap(arr[i], arr[k]);
 		}
 	}
@@ -80,7 +80,7 @@
 		{
 			if ( y == high || (x < mid && arr[x] <= arr[y]) )
 				temp[p++] = arr[x++];
-			else 
+			else
 				temp[p++] = arr[y++];
 		}
 		for(int i = low; i < high; i ++ )
@@ -111,4 +111,36 @@
 
 
 /***************************Bucket Sort********************************/
+const double EPS = 1e-9;
+const int BUCKETSIZE = 20;//桶的个数
+const int ARRAYSIZE  =100;//数组的大小
+const int MAXELEMENT = 100000;//数组中最大的数不超过此数
+
+int bucket[BUCKETSIZE], next[ARRAYSIZE], arr[ARRAYSIZE], ans[ARRAYSIZE];
+
+void insertIntoBucket(int idx, int s)//将数组arr的第s个元素插入到第idx个桶中
+{
+    int u = bucket[idx], p = -1;
+    while(u != -1 && arr[u] < arr[s]) {
+        p = u;
+        u = next[u];
+    }
+    next[s] = u;
+    (p == -1 ? bucket[idx] : next[p]) = s;
+}
+
+void BucketSort(int n)
+{
+    memset(bucket, -1, sizeof(bucket));
+    for(int i = 0; i < n; i ++) {
+        int idx = (int)((double)arr[i] / MAXELEMENT * BUCKETSIZE + EPS);//计算所属桶号
+        insertIntoBucket(idx, i);//插入到桶中
+    }
+    int cnt = 0;
+    for(int i = 0; i < BUCKETSIZE; i ++) {
+        for(int p = bucket[i]; p != -1; p = next[p])
+            ans[cnt++] = arr[p];  //从桶中一次拿出每一个元素
+    }
+    memcpy(arr, ans, sizeof(ans));//重新保存在arr数组中（可以不要此语句，将答案保存在ans中）
+}
 
