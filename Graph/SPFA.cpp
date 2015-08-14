@@ -1,5 +1,6 @@
 queue<int>q;
-bool inq[MAXN], cnt[MAXN];
+bool inq[MAXN];
+int cnt[MAXN], d[MAXN];
 
 //返回false表示有负权,否则求出单源最短路
 bool SPFA(int s, int t)
@@ -17,7 +18,7 @@ bool SPFA(int s, int t)
         for(int e = first[x]; e != -1; e = next[e]) if(d[v[e]] > d[x] + w[e])
         {
             d[v[e]] = d[x] +w[e];
-            if(!inq[d[e]])   //   如果已经在队列中，就不要重复添加了
+            if(!inq[v[e]])   //   如果已经在队列中，就不要重复添加了
             {
                 inq[v[e]] = true;
                 q.push(v[e]);

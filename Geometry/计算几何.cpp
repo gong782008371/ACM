@@ -18,7 +18,7 @@ using namespace std;
 #define mem0(a) memset(a,0, sizeof(a))
 #define mem1(a) memset(a,-1,sizeof(a))
 double MAX(double a, double b) {return a > b ? a : b;}
-double MIn(double a, double b) {return a < b ? a : b;}
+double MIN(double a, double b) {return a < b ? a : b;}
 typedef long long LL;
 /****************************************计算几何头文件**************************************************/
 struct Point{

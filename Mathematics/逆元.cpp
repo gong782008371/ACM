@@ -1,7 +1,7 @@
 void ex_gcd(LL a, LL b, LL& x, LL& y)
 {
     if(!b) { x = 1; y = 0; }
-    else { gcd(b, a % b, y, x); y -= x*(a/b); }
+    else { ex_gcd(b, a % b, y, x); y -= x*(a/b); }
 }
 
 //ax=1 mod(m) ·µ»Øx
