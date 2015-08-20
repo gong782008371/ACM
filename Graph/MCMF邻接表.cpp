@@ -3,7 +3,7 @@ struct Edge {
 	int from, to, cap, flow, cost;
 	Edge(){}
 	Edge(int _u, int _v, int _c, int _f, int _cost){
-		fron = _u; to = _v; cap = _c;
+		from = _u; to = _v; cap = _c;
 		flow = _f; cost = _cost;
 	}
 };
@@ -139,7 +139,7 @@ struct MCMF
                 }
 			}
 		}
-		if(d[t] >= 0) return false;
+		if(d[t] == INF) return false;
 
 		flow += a[t];
 		cost += d[t] * a[t];
